@@ -3,6 +3,7 @@ let shuffleCards =
 const drawBtn = document.querySelector("#draw-card");
 const cardDisp = document.querySelector("#card-display");
 let count = 0;
+let deckId = null
 
 createCard = (s, v, img) => {
   let cardDiv = document.createElement("div");
@@ -17,24 +18,16 @@ createCard = (s, v, img) => {
   cardDiv.style.transform = "rotate(" + deg + "deg)";
 };
 
-let shuffle = new Promise((resolve, reject) => {
-  axios.get(shuffleCards).then((res) => {
-    console.log(res.data);
-    let deckId = res.data.deck_id;
-    resolve(deckId);
-  });
+
+axios.get(shuffleCards).then((res) => {
+  console.log(res.data);
+  deckId = res.data.deck_id;
+  
 });
 
-draw = () => {
-  shuffle
-    .then((deckId) => {
-      return axios.get(
-        `http://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`
-      );
-    })
+drawBtn.addEventListener("click", () => {
+    axios.get(`http://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
     .then((res) => {
-      console.log(res.data);
-      let deckId = res.data.deck_id;
       let cards = res.data.cards;
       if (res.data.error) drawBtn.remove();
       cards.forEach((element) => {
@@ -45,8 +38,6 @@ draw = () => {
     .catch((err) => {
       console.log(err);
     });
-};
 
-drawBtn.addEventListener("click", () => {
-  draw();
 });
+

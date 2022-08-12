@@ -1,0 +1,34 @@
+*, body{
+    width: 100%;
+    height: 100%;
+}
+
+#btn-container{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#draw-card{
+    width: 8%;
+    height: 15%;
+    align-self: center;
+    border-radius: 10px;
+    border: 0 none;
+    background-color: darkgray;
+}
+#card-display{
+    position: relative;
+    height: 35%;
+}
+.cards{
+    position: absolute;
+    height: 80%;
+    width: 15%;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
